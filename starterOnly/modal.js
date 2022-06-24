@@ -42,6 +42,8 @@ function editNav() {
         close_span.addEventListener('click', () => {
           modalbg.style.display = "none";
           reserve_form.reset()
+          reserve.style.display = "block";
+          confirmationBox_div.style.display = "none";
         })
 
 // confirmation panel
