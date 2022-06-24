@@ -10,6 +10,10 @@
 }
 /* Landing Page */
 
+.r {
+  border: 5px double red;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -156,6 +160,10 @@ main {
 .smFont {
   font-size: 16px;
 }
+.errorMessage{
+  color: red;
+  display: none;
+}
 
 .bground {
   display: none;
@@ -184,10 +192,30 @@ main {
 }
 
 .modal-body {
+  /* display: none; */
   padding: 15px 8%;
   margin: 15px auto;
 }
 
+.confirmationBox {
+  display: none;
+  height: min(90vh, 740px);
+  place-items: center;
+  position: relative;
+}
+.confirmationCloseButton {
+  background: #fe142f;
+  padding: 0.75em 4em;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  border-width: 0;
+  position: absolute;
+  bottom: 20px;
+
+  cursor: pointer;
+}
 label {
   font-family: var(--font-default);
   font-size: 17px;
@@ -527,3 +555,7 @@ footer {
   }
 }
 
+
+.formPanel {
+  display: block;
+}
