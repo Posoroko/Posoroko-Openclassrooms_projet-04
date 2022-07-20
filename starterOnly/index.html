@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <title>Reservation</title>
@@ -66,7 +66,7 @@
               
               <button class="confirmationCloseButton">fermer</button>
             </div>
-            <form name="reserve" id="reserve" action="index.html" method="get" onsubmit="return validateFormFields(event);">
+            <form name="reserve" id="reserve" action="index.html" method="get" onsubmit="return requestFormSubmission(event);">
               <div class="formData">
                 <label for="first">Prénom</label><br>
 
@@ -86,7 +86,7 @@
               <div class="formData">
                 <label for="email">E-mail</label><br>
                 
-                <input class="text-control" type="email" id="email" name="email" /><br>
+                <input class="text-control" type="text" id="email" name="email" /><br>
               
                 <p class="smFont errorMessage" id="emailError"></p>
               </div>
@@ -171,8 +171,8 @@
         Copyright 2014 - 2022, GameOn Inc.
       </p>
     </footer>
-    <script src="js/dom.js"></script>
-    <script src="js/validation.js"></script>
-    <script src="js/modal.js"></script>
+
+    <script type="module" src="./js/main.js"></script>
+
   </body>
 </html>
