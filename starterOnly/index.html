@@ -5,7 +5,7 @@
     <title>Reservation</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" href="https://fav.farm/🕹️" />
-    <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans"
@@ -15,7 +15,7 @@
   <body>
     <div class="topnav" id="myTopnav">
         <div class="header-logo">
-            <img alt="logo" src="Logo.png" width="auto" height="auto" />
+            <img alt="logo" src="assets/images/Logo.png" width="auto" height="auto" />
         </div>
         
         <div class="main-navbar">
@@ -25,7 +25,7 @@
             <a href="#"><span>À propos</span></a>
             <a href="#"><span>Contact</span></a>
             <a href="#"><span>Évènements passés</span></a>
-            <a href="javascript:void(0);" class="icon" onclick="editNav()">
+            <a href="javascript:void(0);" class="icon" id="menuIcon">
             <i class="fa fa-bars"></i>
             </a>
         </div>
@@ -48,7 +48,7 @@
           </div>
 
           <div class="hero-img">
-            <img src="./bg_img.jpg" alt="img" />
+            <img src="assets/images/bg_img.jpg" alt="img" />
           </div>
           
           <button class="btn-signup modal-btn">je m'inscris</button>
@@ -66,7 +66,7 @@
               
               <button class="confirmationCloseButton">fermer</button>
             </div>
-            <form name="reserve" id="reserve" action="index.html" method="get" onsubmit="return requestFormSubmission(event);">
+            <form name="reserve" id="reserve" action="index.html" method="get">
               <div class="formData">
                 <label for="first">Prénom</label><br>
 
@@ -172,7 +172,7 @@
       </p>
     </footer>
 
-    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
 
   </body>
 </html>
