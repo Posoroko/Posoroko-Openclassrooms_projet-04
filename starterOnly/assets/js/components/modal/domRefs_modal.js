@@ -12,8 +12,8 @@ const formFields = {
     birthDate: document.getElementById('birthdate'),
     quantity: document.getElementById('quantity'),
     location: modalRefs.form.location,
-    conditions: document.getElementById('checkBox1'),
-    news: document.getElementById('checkBox2')
+    conditions: document.getElementById('checkbox1'),
+    news: document.getElementById('checkbox2')
 }
 
 const errorNodes = {
@@ -25,7 +25,11 @@ const errorNodes = {
     location: document.getElementById('locationError'),
     conditions: document.getElementById('conditionsError')
 }
+const confirmationPanel = {
+    panel: document.getElementById('confirmationPanel'),
+    close: document.getElementById('confirmationCloseButton')
+}
 
 const submitBtn = document.getElementById('submitBtn')
 
-export { modalRefs, formFields, errorNodes, submitBtn }
+export { modalRefs, formFields, errorNodes, submitBtn, confirmationPanel }

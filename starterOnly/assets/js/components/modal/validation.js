@@ -70,8 +70,10 @@ const birthDateValidation = () => {
     }
     if(userHasMinAge(formFields.birthDate.value)) {
         hideError(errorNodes.birthDate)
+        return true
     } else {
         showError(errorNodes.birthDate, errorMessages.underaged)
+        
         return false
     }
 }
@@ -96,7 +98,16 @@ const locationValidation = () => {
         hideError(errorNodes.location)
         return true
     }
+}
+const conditionsValidation = () => {
 
+    if(!formFields.conditions.checked) {
+        showError(errorNodes.conditions, errorMessages.conditions)
+        return false
+    } else{
+        hideError(errorNodes.conditions)
+        return true
+    }
 }
 
 const formValidation = () => {
@@ -119,7 +130,15 @@ const formValidation = () => {
     if(!locationValidation()) {
         error = true
     }
-    
+    if(!conditionsValidation()) {
+        error = true
+    }
+
+    if(!error) {
+        return true
+    } else {
+        return false
+    }
 }
 //once the form is submited, on change eventlisteners are initiated
 // for certain fields. When the input is valid, the error message 
@@ -133,6 +152,11 @@ const initiateOnChangeEvents = () => {
     formFields.email.addEventListener('change', emailValidation)
     formFields.birthDate.addEventListener('change', birthDateValidation)
     formFields.quantity.addEventListener('change', quantityValidation)
-    formFields.location.addEventListener('change', locationValidation)
+    let locations = document.querySelectorAll('.cityRadioBtn')
+    locations.forEach(location => location.onclick = () => {
+        locationValidation()
+    })
+
+    formFields.conditions.addEventListener('change', conditionsValidation)
 }
 export { formValidation, initiateOnChangeEvents }

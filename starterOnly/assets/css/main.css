@@ -219,8 +219,10 @@ main {
   border-width: 0;
   position: absolute;
   bottom: 0px;
-
   cursor: pointer;
+  left: 50%;
+  transform: translateX(-50%);
+  
 }
 label {
   font-family: var(--font-default);
