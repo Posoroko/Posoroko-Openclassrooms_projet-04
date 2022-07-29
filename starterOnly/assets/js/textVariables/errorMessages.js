@@ -11,4 +11,5 @@ const errorMessages = {
     conditions: "Vous devez être d'accord avec les conditions d'utilisation."
 }
 
-export { errorMessages }
+export default errorMessages
+

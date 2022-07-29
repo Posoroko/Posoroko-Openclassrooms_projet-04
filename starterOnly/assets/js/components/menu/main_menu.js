@@ -1,13 +1,11 @@
-import { menuRefs } from "./domReferences/domRefs_menu.js";
-
+import { menuRefs } from "./domRefs_menu.js"
 
 const editNav = () => {
-    console.log('hello  there!')
-    var x = document.getElementById("myTopnav");
+    var x = document.getElementById("myTopnav")
     if (x.className === "topnav") {
-      x.className += " responsive";
+      x.className += " responsive"
     } else {
-      x.className = "topnav";
+      x.className = "topnav"
     }
   }
 

@@ -1,5 +1,5 @@
-import { modalRefs, formFields, errorNodes, submitBtn, confirmationPanel } from './domRefs_modal.js'
-import { formValidation, initiateOnChangeEvents } from './validation.js';
+import { modalRefs, confirmationPanel } from './domRefs_modal.js'
+import { formValidation, initiateOnChangeEvents } from './validation.js'
 import { launchModal, closeModal, showConfirmationPanel } from './display_modal.js'
 
 let formWasSubmited = false
@@ -18,13 +18,11 @@ const requestSubmit = (e) => {
     }
 }
 
-
 const initiateModalEvents = () => {
-    modalRefs.modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+    modalRefs.modalBtn.forEach((btn) => btn.addEventListener("click", launchModal))
     modalRefs.close.addEventListener('click', closeModal)
     modalRefs.form.addEventListener('submit', requestSubmit)
     confirmationPanel.close.addEventListener('click', closeModal)
 }
-
 
 export { initiateModalEvents }

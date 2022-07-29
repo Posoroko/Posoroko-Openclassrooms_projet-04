@@ -25,6 +25,7 @@ const errorNodes = {
     location: document.getElementById('locationError'),
     conditions: document.getElementById('conditionsError')
 }
+
 const confirmationPanel = {
     panel: document.getElementById('confirmationPanel'),
     close: document.getElementById('confirmationCloseButton')

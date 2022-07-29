@@ -1,68 +1,73 @@
-import { minAge, maxQuantity, minNameLength, maxNameLength } from '../../text_and_values/customValues.js'
-import { errorMessages } from '../../text_and_values/errorMessages.js'
-import { modalRefs, formFields, errorNodes, submitBtn } from './domRefs_modal.js'
+import formValidationParams from '../../config/formParameters.js'
+import errorMessages from '../../textVariables/errorMessages.js'
+import { formFields, errorNodes } from './domRefs_modal.js'
 import { showError, hideError } from './errorHandling.js'
 
-const nameLengthIsValid = (string) => {
-  if(string.length >= minNameLength && string.length <= maxNameLength) {
-    return true
-  }
+const stringLengthIsValid = (string, minLength, maxLength) => {
+    if(string.length >= minLength && string.length <= maxLength) {
+        return true
+      }
+      return false
 }
+
 const emailFormatIsValid = (string) => {
   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(string)) {
     return true
   }
+  return false
 }
 
 const userHasMinAge = (fieldValue) => {
-  let today = new Date()
-  let birthDate = new Date(fieldValue)
-  let age = today.getFullYear() - birthDate.getFullYear()
-  let monthDifference = today.getMonth() - birthDate.getMonth()
-  if ( monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-      age--
-  }
-  if (age >= minAge ) {
-      return true
-  } else {
+    let today = new Date()
+    let birthDate = new Date(fieldValue)
+    let age = today.getFullYear() - birthDate.getFullYear()
+    let monthDifference = today.getMonth() - birthDate.getMonth()
+    if ( monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--
+    }
+    if (age >= formValidationParams.minAge ) {
+        return true
+    }  
     return false
-  }
 }
 
 const quantityIsValid = (fieldValue) => {
-    if (fieldValue > 0 && fieldValue <= maxQuantity ) {
+    if (fieldValue >= formValidationParams.minQuantity && fieldValue <= formValidationParams.maxQuantity ) {
         return true
     }
+
+    return false
 }
 
-//
+//isFirstNameValid
 const firstNameValidation = () => {
-    if (nameLengthIsValid(formFields.firstName.value)) {
+    if (stringLengthIsValid(formFields.firstName.value, formValidationParams.minNameLength, formValidationParams.maxNameLength)) {
         hideError(errorNodes.firstName)
         return true
-    } else {
-        showError(errorNodes.firstName, errorMessages.nameLength)
-        return false
     }
+    showError(errorNodes.firstName, errorMessages.nameLength)
+    return false
 }
+
 const lastNameValidation = () => {
-    if (nameLengthIsValid(formFields.lastName.value)) {
+    if (stringLengthIsValid(formFields.lastName.value, formValidationParams.minNameLength, formValidationParams.maxNameLength)) {
         hideError(errorNodes.lastName)
         return true
-    } else {
-        showError(errorNodes.lastName, errorMessages.nameLength)
-        return false
     }
+    showError(errorNodes.lastName, errorMessages.nameLength)
+    return false
 }
+
 const emailValidation = () => {
-    if(emailFormatIsValid(formFields.email.value)) {
+    if(emailFormatIsValid(formFields.email.value)
+        && (stringLengthIsValid(formFields.email.value, formValidationParams.minEmailLength, formValidationParams.maxEmailLength))) {
         hideError(errorNodes.email)
         return true
-    } else {
-        showError(errorNodes.email, errorMessages.emailInvalid)
-        return false
     }
+    showError(errorNodes.email, errorMessages.emailInvalid)
+    return false
 }
+
 const birthDateValidation = () => {
     if(!formFields.birthDate.value) {
         showError(errorNodes.birthDate, errorMessages.birthDateEmpty)
@@ -71,43 +76,42 @@ const birthDateValidation = () => {
     if(userHasMinAge(formFields.birthDate.value)) {
         hideError(errorNodes.birthDate)
         return true
-    } else {
-        showError(errorNodes.birthDate, errorMessages.underaged)
-        
-        return false
     }
+    showError(errorNodes.birthDate, errorMessages.underaged)
+    return false
 }
+
 const quantityValidation = () => {
     if(!formFields.quantity.value) {
         showError(errorNodes.quantity, errorMessages.quantityEmpty)
         return false
     }
-    if(quantityIsValid(formFields.quantity.value)) {
+    if(quantityIsValid(formFields.quantity.value)
+        && (stringLengthIsValid(formFields.quantity.value.toString(), formValidationParams.minQuantityLength, formValidationParams.maxQuantityLength))) {
         hideError(errorNodes.quantity)
         return true
-    } else {
-        showError(errorNodes.quantity, errorMessages.quantityTooHigh)
-        return false
     }
+    showError(errorNodes.quantity, errorMessages.quantityTooHigh)
+    return false
 }
+
 const locationValidation = () => {
     if(!formFields.location.value) {
         showError(errorNodes.location, errorMessages.location)
         return false
-    } else {
-        hideError(errorNodes.location)
-        return true
     }
+    hideError(errorNodes.location)
+    return true
 }
+
 const conditionsValidation = () => {
 
     if(!formFields.conditions.checked) {
         showError(errorNodes.conditions, errorMessages.conditions)
         return false
-    } else{
-        hideError(errorNodes.conditions)
-        return true
     }
+    hideError(errorNodes.conditions)
+    return true
 }
 
 const formValidation = () => {
@@ -140,13 +144,11 @@ const formValidation = () => {
         return false
     }
 }
+
 //once the form is submited, on change eventlisteners are initiated
 // for certain fields. When the input is valid, the error message 
 //is hidden.
-
-
 const initiateOnChangeEvents = () => {
-
     formFields.firstName.addEventListener('change', firstNameValidation)
     formFields.lastName.addEventListener('change', lastNameValidation)
     formFields.email.addEventListener('change', emailValidation)
@@ -159,4 +161,5 @@ const initiateOnChangeEvents = () => {
 
     formFields.conditions.addEventListener('change', conditionsValidation)
 }
+
 export { formValidation, initiateOnChangeEvents }
