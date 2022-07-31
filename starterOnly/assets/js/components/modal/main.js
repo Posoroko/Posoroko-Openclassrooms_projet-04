@@ -8,7 +8,7 @@ let isPending = false
 
 const requestSubmit = async (e) => {
     e.preventDefault()
-    formFields.submit.value = "patientez..."
+    
 
     if(!formWasSubmited) {
         formWasSubmited = true
@@ -18,6 +18,12 @@ const requestSubmit = async (e) => {
     if(!formValidation()) {
         return
     }
+
+    // handle state of submit button
+    formFields.submit.value = "patientez..."
+    formFields.submit.disabled = true
+
+    //build object for posting to server
 
     let userData = {
         firstName: formFields.firstName.value,
@@ -36,6 +42,7 @@ const requestSubmit = async (e) => {
     })
 
     formFields.submit.value = "C'est parti"
+    formFields.submit.disabled = false
 
     modalRefs.form.reset()
 
