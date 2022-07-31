@@ -21,7 +21,7 @@ const requestSubmit = async (e) => {
 
     // handle state of submit button
     formFields.submit.value = "patientez..."
-    formFields.submit.disabled = true
+    formFields.submit.disabled = "disabled"
 
     //build object for posting to server
 
