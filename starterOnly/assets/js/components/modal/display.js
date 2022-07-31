@@ -1,4 +1,4 @@
-import { modalRefs, confirmationPanel } from "./domRefs_modal.js"
+import { modalRefs, confirmationPanel } from "./domRefs.js"
 
 
 // launch modal form

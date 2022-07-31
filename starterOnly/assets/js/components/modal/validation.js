@@ -1,12 +1,15 @@
 import formValidationParams from '../../config/formParameters.js'
-import errorMessages from '../../textVariables/errorMessages.js'
-import { formFields, errorNodes } from './domRefs_modal.js'
+import errorMessages from '../../variables/errorMessages.js'
+import { formFields, errorNodes } from './domRefs.js'
 import { showError, hideError } from './errorHandling.js'
+
+//string length and format verification, age calculation
 
 const stringLengthIsValid = (string, minLength, maxLength) => {
     if(string.length >= minLength && string.length <= maxLength) {
         return true
       }
+
       return false
 }
 
@@ -39,22 +42,30 @@ const quantityIsValid = (fieldValue) => {
     return false
 }
 
-//isFirstNameValid
+// handling inputs and errors on submission
+
+
 const firstNameValidation = () => {
     if (stringLengthIsValid(formFields.firstName.value, formValidationParams.minNameLength, formValidationParams.maxNameLength)) {
         hideError(errorNodes.firstName)
+        
         return true
     }
+    
     showError(errorNodes.firstName, errorMessages.nameLength)
+    
     return false
 }
 
 const lastNameValidation = () => {
     if (stringLengthIsValid(formFields.lastName.value, formValidationParams.minNameLength, formValidationParams.maxNameLength)) {
         hideError(errorNodes.lastName)
+        
         return true
     }
+    
     showError(errorNodes.lastName, errorMessages.nameLength)
+    
     return false
 }
 
@@ -62,19 +73,25 @@ const emailValidation = () => {
     if(emailFormatIsValid(formFields.email.value)
         && (stringLengthIsValid(formFields.email.value, formValidationParams.minEmailLength, formValidationParams.maxEmailLength))) {
         hideError(errorNodes.email)
+        
         return true
     }
+    
     showError(errorNodes.email, errorMessages.emailInvalid)
+    
     return false
 }
 
 const birthDateValidation = () => {
     if(!formFields.birthDate.value) {
         showError(errorNodes.birthDate, errorMessages.birthDateEmpty)
+        
         return false
     }
     if(userHasMinAge(formFields.birthDate.value)) {
+        
         hideError(errorNodes.birthDate)
+        
         return true
     }
     showError(errorNodes.birthDate, errorMessages.underaged)
@@ -91,31 +108,41 @@ const quantityValidation = () => {
         hideError(errorNodes.quantity)
         return true
     }
+    
     showError(errorNodes.quantity, errorMessages.quantityTooHigh)
+    
     return false
 }
 
 const locationValidation = () => {
     if(!formFields.location.value) {
         showError(errorNodes.location, errorMessages.location)
+        
         return false
     }
+    
     hideError(errorNodes.location)
+    
     return true
 }
 
 const conditionsValidation = () => {
-
     if(!formFields.conditions.checked) {
         showError(errorNodes.conditions, errorMessages.conditions)
+        
         return false
     }
+    
     hideError(errorNodes.conditions)
+    
     return true
 }
 
+//on form submission
+
 const formValidation = () => {
     let error = false
+
     if(!firstNameValidation()) {
         error = true
     }
@@ -145,16 +172,24 @@ const formValidation = () => {
     }
 }
 
-//once the form is submited, on change eventlisteners are initiated
-// for certain fields. When the input is valid, the error message 
-//is hidden.
+/**
+ * once the form is submited, on change eventlisteners are initiated 
+ * for certain fields. When the input is valid, the error message 
+ * is hidden.
+**/
 const initiateOnChangeEvents = () => {
     formFields.firstName.addEventListener('change', firstNameValidation)
+    
     formFields.lastName.addEventListener('change', lastNameValidation)
+    
     formFields.email.addEventListener('change', emailValidation)
+    
     formFields.birthDate.addEventListener('change', birthDateValidation)
+    
     formFields.quantity.addEventListener('change', quantityValidation)
+    
     let locations = document.querySelectorAll('.cityRadioBtn')
+    
     locations.forEach(location => location.onclick = () => {
         locationValidation()
     })

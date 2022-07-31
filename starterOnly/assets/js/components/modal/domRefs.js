@@ -13,7 +13,8 @@ const formFields = {
     quantity: document.getElementById('quantity'),
     location: modalRefs.form.location,
     conditions: document.getElementById('checkbox1'),
-    news: document.getElementById('checkbox2')
+    news: document.getElementById('checkbox2'),
+    submit: document.getElementById('submitBtn')
 }
 
 const errorNodes = {
