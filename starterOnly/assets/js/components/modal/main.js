@@ -7,6 +7,8 @@ import { capitalizeFirstLetter } from '../../miscFunctions/textFormatting.js'
 let formWasSubmited = false
 let isPending = false
 
+
+//when form is submited by the user:
 const requestSubmit = async (e) => {
     e.preventDefault()
     

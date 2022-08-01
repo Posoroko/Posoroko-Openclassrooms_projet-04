@@ -1,7 +1,6 @@
 import { modalRefs, confirmationPanel } from "./domRefs.js"
 
 
-// launch modal form
 const launchModal = () => {
     modalRefs.background.style.display = "block"
 }
