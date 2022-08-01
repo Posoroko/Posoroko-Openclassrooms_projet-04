@@ -2,6 +2,7 @@ import { modalRefs, confirmationPanel, formFields } from './domRefs.js'
 import { formValidation, initiateOnChangeEvents } from './validation.js'
 import { launchModal, closeModal, showConfirmationPanel } from './display.js'
 import { handlePostRequest } from '../../server/serverRequests.js'
+import { capitalizeFirstLetter } from '../../miscFunctions/textFormatting.js'
 
 let formWasSubmited = false
 let isPending = false
@@ -26,14 +27,15 @@ const requestSubmit = async (e) => {
     //build object for posting to server
 
     let userData = {
-        firstName: formFields.firstName.value,
-        lastName: formFields.lastName.value,
-        email: formFields.email.value,
+        firstName: capitalizeFirstLetter(formFields.firstName.value),
+        lastName: capitalizeFirstLetter(formFields.lastName.value),
+        email: formFields.email.value.toLowerCase(),
         birthDate: formFields.birthDate.value,
         quantity: formFields.quantity.value,
         location: formFields.location.value,
         newsRequested: formFields.news.checked
     }
+    console.table(userData)
 
     await handlePostRequest(userData).then(res => {
         console.log(res.message)
